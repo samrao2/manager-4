@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
+//reduxthnunk is helping us with aync operations, its a middlware
+//to help with this middleware we need a ahelper from Redux library
+//
+import Reduxthunk from 'redux-thunk';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
 
