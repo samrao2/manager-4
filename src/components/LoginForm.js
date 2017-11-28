@@ -1,5 +1,5 @@
 //we need this component to use react components library
-import React, { Component } from 'react';
+import React, { Component, Text, View } from 'react';
 //this connect helper that will connect the action to the login form
 import { connect } from 'react-redux';
 //this is an action creator that we need to import in to connect with the reducers
@@ -20,7 +20,18 @@ class Loginform extends Component {
 
   onButtonPress() {
 const { email, password } = this.props;
-this.props.loginUser({ email, password });  
+this.props.loginUser({ email, password });
+  }
+  renderError() {
+    if (this.props.error) {
+      return (
+        <View style={{ backgroundColor: 'White' }}>
+         <Text style={styles.errorTextStyle}>
+          {this.props.error}
+         </Text>
+        </View>
+      );
+    }
   }
   render() {
     return (
@@ -47,6 +58,8 @@ this.props.loginUser({ email, password });
         />
       </CardSection>
 
+        {this.renderError()}
+
       <CardSection>
         <Button onPress={this.onButtonPress.bind(this)}>
           Login
@@ -63,7 +76,8 @@ const mapStateToProps = state => {
 //the global state object contains another object called auth, which containts the email
 //property
     email: state.auth.email,
-    password: state.auth.password
+    password: state.auth.password,
+    error: state.auth.error
   };
 };
 

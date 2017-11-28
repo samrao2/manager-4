@@ -1,13 +1,17 @@
 //this is importing the email changed variable instead of the string in the action
 import { EMAIL_CHANGED,
-         PASSWORD_CHANGED
+         PASSWORD_CHANGED,
+         LOGIN_USER_SUCCESS,
+         LOGIN_USER_FAIL
  } from '../actions/types';
 
 //we need to do this otherwise the initial value will be undefined and the
 //action will not work
 const INITIAL_STATE = {
   email: '',
-  password: ''
+  password: '',
+  user: null,
+  error: ''
 };
 
 //this is the reducer below, its got 2 arguments, the state and action
@@ -26,6 +30,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, password: action.payload };
   //if none of the cases come out to be true above, it will default to the
   //beginning state with no changes
+    case LOGIN_USER_SUCCESS:
+      return { ...state, user: action.payload };
+    case LOGIN_USER_FAIL:
+      return { ...state, error: 'Authentication Failed!' };
     default:
       return state;
   }

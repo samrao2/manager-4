@@ -5,7 +5,7 @@ import firebase from 'firebase';
 //reduxthnunk is helping us with aync operations, its a middlware
 //to help with this middleware we need a ahelper from Redux library
 //
-import Reduxthunk from 'redux-thunk';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
 
@@ -22,14 +22,14 @@ class App extends Component {
   };
   firebase.initializeApp(config);
   }
-
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
-          <Provider store={createStore(reducers)}>
+          <Provider store={store}>
           <LoginForm />
         </Provider>
-      );
-    }
+    );
+  }
 }
 
 export default App;
