@@ -1,11 +1,12 @@
 //we need this component to use react components library
-import React, { Component, Text, View } from 'react';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 //this connect helper that will connect the action to the login form
 import { connect } from 'react-redux';
 //this is an action creator that we need to import in to connect with the reducers
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 //these are our pre-styled components
-import { Card, CardSection, Input, Button } from './common';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 //login form is declared as an instance of the class "component"
 class Loginform extends Component {
@@ -22,10 +23,20 @@ class Loginform extends Component {
 const { email, password } = this.props;
 this.props.loginUser({ email, password });
   }
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+   return (
+     <Button onPress={this.onButtonPress.bind(this)}>
+     Login
+     </Button>
+   );
+  }
   renderError() {
     if (this.props.error) {
       return (
-        <View style={{ backgroundColor: 'White' }}>
+        <View style={{ backgroundcolor: 'White' }}>
          <Text style={styles.errorTextStyle}>
           {this.props.error}
          </Text>
@@ -61,24 +72,24 @@ this.props.loginUser({ email, password });
         {this.renderError()}
 
       <CardSection>
-        <Button onPress={this.onButtonPress.bind(this)}>
-          Login
-        </Button>
+        {this.renderButton()}
       </CardSection>
     </Card>
   );
   }
 }
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+};
 //this function is from the react-redux library and helps to map some piece of state
 //onto the component
-const mapStateToProps = state => {
-  return {
-//the global state object contains another object called auth, which containts the email
-//property
-    email: state.auth.email,
-    password: state.auth.password,
-    error: state.auth.error
-  };
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error, loading } = auth;
+  return { email, password, error, loading };
 };
 
 //we are connecting/binding our action creator via the connect helper

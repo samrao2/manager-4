@@ -2,7 +2,8 @@
 import { EMAIL_CHANGED,
          PASSWORD_CHANGED,
          LOGIN_USER_SUCCESS,
-         LOGIN_USER_FAIL
+         LOGIN_USER_FAIL,
+         LOGIN_USER
  } from '../actions/types';
 
 //we need to do this otherwise the initial value will be undefined and the
@@ -30,10 +31,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, password: action.payload };
   //if none of the cases come out to be true above, it will default to the
   //beginning state with no changes
+    case LOGIN_USER:
+      return { ...state, loading: true, error: '' };
     case LOGIN_USER_SUCCESS:
-      return { ...state, user: action.payload };
+      return { ...state, ...INITIAL_STATE, user: action.payloads
+       };
     case LOGIN_USER_FAIL:
-      return { ...state, error: 'Authentication Failed!' };
+      return { ...state, error: 'Authentication Failed!', loading: false };
     default:
       return state;
   }
