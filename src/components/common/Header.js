@@ -12,7 +12,7 @@ const Header = (props) => {
     </View>
   );
 };
-
+//random comment
 const styles = {
   viewStyle: {
     backgroundColor: '#F8F8F8',
