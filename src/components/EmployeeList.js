@@ -8,12 +8,6 @@ class EmployeeList extends Component {
         <Text>Employee List</Text>
         <Text>Employee List</Text>
         <Text>Employee List</Text>
-        <Text>Employee List</Text>
-        <Text>Employee List</Text>
-        <Text>Employee List</Text>
-        <Text>Employee List</Text>
-        <Text>Employee List</Text>
-        <Text>Employee List</Text>
       </View>
     );
   }
