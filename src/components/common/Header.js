@@ -1,3 +1,4 @@
+
 // Import libraries for making a component
 import React from 'react';
 import { Text, View } from 'react-native';
@@ -12,7 +13,7 @@ const Header = (props) => {
     </View>
   );
 };
-//random comment
+
 const styles = {
   viewStyle: {
     backgroundColor: '#F8F8F8',
